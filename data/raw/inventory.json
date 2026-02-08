@@ -1,0 +1,257 @@
+{
+  "SKU-100": {
+    "qty_on_hand": 253,
+    "reorder_point": 188,
+    "safety_stock": 75
+  },
+  "SKU-101": {
+    "qty_on_hand": 82,
+    "reorder_point": 54,
+    "safety_stock": 21
+  },
+  "SKU-102": {
+    "qty_on_hand": 93,
+    "reorder_point": 31,
+    "safety_stock": 20
+  },
+  "SKU-103": {
+    "qty_on_hand": 303,
+    "reorder_point": 215,
+    "safety_stock": 86
+  },
+  "SKU-104": {
+    "qty_on_hand": 141,
+    "reorder_point": 95,
+    "safety_stock": 38
+  },
+  "SKU-105": {
+    "qty_on_hand": 95,
+    "reorder_point": 88,
+    "safety_stock": 35
+  },
+  "SKU-106": {
+    "qty_on_hand": 144,
+    "reorder_point": 82,
+    "safety_stock": 33
+  },
+  "SKU-107": {
+    "qty_on_hand": 75,
+    "reorder_point": 60,
+    "safety_stock": 24
+  },
+  "SKU-108": {
+    "qty_on_hand": 279,
+    "reorder_point": 214,
+    "safety_stock": 85
+  },
+  "SKU-109": {
+    "qty_on_hand": 97,
+    "reorder_point": 51,
+    "safety_stock": 20
+  },
+  "SKU-110": {
+    "qty_on_hand": 283,
+    "reorder_point": 198,
+    "safety_stock": 79
+  },
+  "SKU-111": {
+    "qty_on_hand": 276,
+    "reorder_point": 214,
+    "safety_stock": 86
+  },
+  "SKU-112": {
+    "qty_on_hand": 255,
+    "reorder_point": 164,
+    "safety_stock": 66
+  },
+  "SKU-113": {
+    "qty_on_hand": 62,
+    "reorder_point": 47,
+    "safety_stock": 20
+  },
+  "SKU-114": {
+    "qty_on_hand": 242,
+    "reorder_point": 176,
+    "safety_stock": 70
+  },
+  "SKU-115": {
+    "qty_on_hand": 181,
+    "reorder_point": 133,
+    "safety_stock": 53
+  },
+  "SKU-116": {
+    "qty_on_hand": 73,
+    "reorder_point": 33,
+    "safety_stock": 20
+  },
+  "SKU-117": {
+    "qty_on_hand": 2,
+    "reorder_point": 32,
+    "safety_stock": 20
+  },
+  "SKU-118": {
+    "qty_on_hand": 83,
+    "reorder_point": 49,
+    "safety_stock": 20
+  },
+  "SKU-119": {
+    "qty_on_hand": 114,
+    "reorder_point": 81,
+    "safety_stock": 32
+  },
+  "SKU-120": {
+    "qty_on_hand": 153.0,
+    "reorder_point": 84,
+    "safety_stock": 34
+  },
+  "SKU-121": {
+    "qty_on_hand": 230.0,
+    "reorder_point": 154,
+    "safety_stock": 62
+  },
+  "SKU-122": {
+    "qty_on_hand": 191.0,
+    "reorder_point": 179,
+    "safety_stock": 72
+  },
+  "SKU-123": {
+    "qty_on_hand": 90.59999999999515,
+    "reorder_point": 32,
+    "safety_stock": 20
+  },
+  "SKU-124": {
+    "qty_on_hand": 674,
+    "reorder_point": 168,
+    "safety_stock": 67
+  },
+  "SKU-125": {
+    "qty_on_hand": 303,
+    "reorder_point": 76,
+    "safety_stock": 30
+  },
+  "SKU-126": {
+    "qty_on_hand": 237.79999999997528,
+    "reorder_point": 208,
+    "safety_stock": 83
+  },
+  "SKU-127": {
+    "qty_on_hand": 404.59999999994864,
+    "reorder_point": 191,
+    "safety_stock": 76
+  },
+  "SKU-128": {
+    "qty_on_hand": 212.0,
+    "reorder_point": 204,
+    "safety_stock": 82
+  },
+  "SKU-129": {
+    "qty_on_hand": 658,
+    "reorder_point": 164,
+    "safety_stock": 66
+  },
+  "SKU-130": {
+    "qty_on_hand": 157.0,
+    "reorder_point": 132,
+    "safety_stock": 53
+  },
+  "SKU-131": {
+    "qty_on_hand": 105.30000000000464,
+    "reorder_point": 81,
+    "safety_stock": 32
+  },
+  "SKU-132": {
+    "qty_on_hand": 559,
+    "reorder_point": 140,
+    "safety_stock": 56
+  },
+  "SKU-133": {
+    "qty_on_hand": 703,
+    "reorder_point": 176,
+    "safety_stock": 70
+  },
+  "SKU-134": {
+    "qty_on_hand": 384,
+    "reorder_point": 96,
+    "safety_stock": 38
+  },
+  "SKU-135": {
+    "qty_on_hand": 283.0,
+    "reorder_point": 232,
+    "safety_stock": 93
+  },
+  "SKU-136": {
+    "qty_on_hand": 229.0,
+    "reorder_point": 248,
+    "safety_stock": 99
+  },
+  "SKU-137": {
+    "qty_on_hand": 106,
+    "reorder_point": 30,
+    "safety_stock": 20
+  },
+  "SKU-138": {
+    "qty_on_hand": 289,
+    "reorder_point": 219,
+    "safety_stock": 88
+  },
+  "SKU-139": {
+    "qty_on_hand": 269,
+    "reorder_point": 231,
+    "safety_stock": 92
+  },
+  "SKU-140": {
+    "qty_on_hand": 84,
+    "reorder_point": 66,
+    "safety_stock": 26
+  },
+  "SKU-141": {
+    "qty_on_hand": 303,
+    "reorder_point": 204,
+    "safety_stock": 81
+  },
+  "SKU-142": {
+    "qty_on_hand": 138,
+    "reorder_point": 133,
+    "safety_stock": 53
+  },
+  "SKU-143": {
+    "qty_on_hand": 183,
+    "reorder_point": 112,
+    "safety_stock": 45
+  },
+  "SKU-144": {
+    "qty_on_hand": 156,
+    "reorder_point": 96,
+    "safety_stock": 38
+  },
+  "SKU-145": {
+    "qty_on_hand": 68,
+    "reorder_point": 65,
+    "safety_stock": 26
+  },
+  "SKU-146": {
+    "qty_on_hand": 65,
+    "reorder_point": 80,
+    "safety_stock": 32
+  },
+  "SKU-147": {
+    "qty_on_hand": 318,
+    "reorder_point": 220,
+    "safety_stock": 88
+  },
+  "SKU-148": {
+    "qty_on_hand": 151,
+    "reorder_point": 111,
+    "safety_stock": 44
+  },
+  "SKU-149": {
+    "qty_on_hand": 97,
+    "reorder_point": 51,
+    "safety_stock": 20
+  },
+  "DRONE-X1": {
+    "qty_on_hand": 0,
+    "reorder_point": 15,
+    "safety_stock": 5
+  }
+}
