@@ -1,3 +1,7 @@
+# Local / accidental
+db-structure.txt
+error.txt
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
@@ -153,6 +157,8 @@ venv.bak/
 
 # mkdocs documentation
 /site
+
+/notebooks
 
 # mypy
 .mypy_cache/
