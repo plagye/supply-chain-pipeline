@@ -27,8 +27,6 @@ def get_engine(db_name):
     engine = create_engine(conn_str, connect_args=SSL_ARGS)
     return engine
 
-
-
 def init_schema():
     engine = get_engine("postgres")
 
@@ -44,7 +42,7 @@ def init_tables():
         # DIM
         """
             CREATE TABLE IF NOT EXISTS dim_suppliers (
-            supplier_id UUID PRIMARY KEY,
+            supplier_id VARCHAR(100) PRIMARY KEY,
             name VARCHAR(255),
             country VARCHAR(100),
             reliability_score DECIMAL(3,2),
@@ -54,12 +52,18 @@ def init_tables():
         """,
         """
             CREATE TABLE IF NOT EXISTS dim_customers (
-            customer_id UUID PRIMARY KEY,
+            customer_id VARCHAR(100) PRIMARY KEY,
             company_name VARCHAR(255),
+            segment VARCHAR(100),
             region VARCHAR(100),
+            country VARCHAR(100),
+            street VARCHAR(255),
+            city VARCHAR(100),
+            state VARCHAR(100),
+            postal_code VARCHAR(50),
+            destination_facility_id VARCHAR(100),
+            delivery_location_code VARCHAR(100),
             contract_priority VARCHAR(50),
-            shipping_address VARCHAR(500),
-            penalty_clauses JSONB
         );
         """,
         """
@@ -71,6 +75,37 @@ def init_tables():
             unit_of_measure VARCHAR(50),
             reorder_point INTEGER DEFAULT 0,
             safety_stock INTEGER DEFAULT 0
+        );
+        """,
+        """
+            CREATE TABLE IF NOT EXISTS dim_facilities (
+            facility_id VARCHAR(100) PRIMARY KEY,
+            facility_name VARCHAR(255),
+            city VARCHAR(100),
+            state VARCHAR(100),
+            country VARCHAR(100),
+            facility_type VARCHAR(100),
+            region VARCHAR(100),
+            location_code VARCHAR(100)
+        );
+        """,
+        """
+            CREATE TABLE IF NOT EXISTS dim_routes (
+            route_id VARCHAR(100) PRIMARY KEY,
+            origin_facility_id VARCHAR(100) REFERENCES dim_facilities(facility_id),
+            origin_location_code VARCHAR(100),
+            destination_country VARCHAR(100),
+            typical_distance_miles INTEGER,
+            typical_transit_days INTEGER,
+            base_rate_per_mile DECIMAL(10,2)
+        );
+        """,
+        """
+            CREATE TABLE IF NOT EXISTS dim_products (
+            product_id VARCHAR(100) PRIMARY KEY,
+            name VARCHAR(255),
+            type VARCHAR(100),
+            key_features TEXT
         );
         """,
         # FACT
@@ -93,7 +128,7 @@ def init_tables():
         """
             CREATE TABLE IF NOT EXISTS fact_orders (
             order_id VARCHAR(100) PRIMARY KEY,
-            customer_id UUID REFERENCES dim_customers(customer_id),
+            customer_id VARCHAR(100) REFERENCES dim_customers(customer_id),
             order_date TIMESTAMPTZ,
             total_amount DECIMAL(12,2),
             status VARCHAR(50)

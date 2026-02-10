@@ -157,7 +157,7 @@ venv.bak/
 
 # mkdocs documentation
 /site
-
+data/
 /notebooks
 
 # mypy

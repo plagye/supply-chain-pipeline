@@ -1,182 +1,212 @@
 [
   {
-    "customer_id": "3a5e289d-b23b-4560-80a8-6a64e2b62fad",
-    "company_name": "National Aeronautics & Defense Works",
+    "customer_id": "CUST-001",
+    "company_name": "DroneZone NYC",
+    "segment": "Retail",
     "region": "NA",
-    "contract_priority": "Tier 1",
-    "shipping_address": "PSC 0032, Box 3167, APO AE 75478",
-    "penalty_clauses": {
-      "late_delivery": {
-        "grace_period_days": 0,
-        "penalty_rate": "2% of PO value per day",
-        "max_penalty": "25% of PO value",
-        "liquidated_damages": true,
-        "expedite_at_supplier_cost": true,
-        "on_time_delivery_sla": ">= 98% monthly"
-      },
-      "quality": {
-        "incoming_inspection": "100% for critical components",
-        "rework_at_supplier_cost": true,
-        "rca_due_within_days": 5
-      }
-    }
+    "country": "USA",
+    "street": "100 Broadway",
+    "city": "New York",
+    "state": "NY",
+    "postal_code": "10001",
+    "destination_facility_id": "dist_na_01",
+    "delivery_location_code": "USA_DET",
+    "contract_priority": "Tier 2"
   },
   {
-    "customer_id": "5ab8960a-67bc-44d9-aabf-5a7f39a084c5",
-    "company_name": "Royal Naval Systems Authority",
+    "customer_id": "CUST-002",
+    "company_name": "HobbyKing LA",
+    "segment": "Retail",
     "region": "NA",
-    "contract_priority": "Tier 1",
-    "shipping_address": "USCGC Reyes, FPO AP 61654",
-    "penalty_clauses": {
-      "late_delivery": {
-        "grace_period_days": 0,
-        "penalty_rate": "2% of PO value per day",
-        "max_penalty": "25% of PO value",
-        "liquidated_damages": true,
-        "expedite_at_supplier_cost": true,
-        "on_time_delivery_sla": ">= 98% monthly"
-      },
-      "quality": {
-        "incoming_inspection": "100% for critical components",
-        "rework_at_supplier_cost": true,
-        "rca_due_within_days": 5
-      }
-    }
+    "country": "USA",
+    "street": "200 Sunset Blvd",
+    "city": "Los Angeles",
+    "state": "CA",
+    "postal_code": "90001",
+    "destination_facility_id": "dist_na_02",
+    "delivery_location_code": "USA_DAL",
+    "contract_priority": "Tier 2"
   },
   {
-    "customer_id": "a3c09486-e7ce-4234-b6ed-35138f19a7d9",
-    "company_name": "Federal Ordnance Manufacturing Agency",
-    "region": "EMEA",
-    "contract_priority": "Tier 1",
-    "shipping_address": "6 Roy Land, West Lisa, WS4A 2DZ",
-    "penalty_clauses": {
-      "late_delivery": {
-        "grace_period_days": 0,
-        "penalty_rate": "2% of PO value per day",
-        "max_penalty": "25% of PO value",
-        "liquidated_damages": true,
-        "expedite_at_supplier_cost": true,
-        "on_time_delivery_sla": ">= 97% quarterly"
-      },
-      "quality": {
-        "incoming_inspection": "100% for critical components",
-        "rework_at_supplier_cost": true,
-        "rca_due_within_days": 5
-      }
-    }
-  },
-  {
-    "customer_id": "1cd43e88-3482-4fcc-ad8f-0396809ded32",
-    "company_name": "State Aerospace Systems Directorate",
+    "customer_id": "CUST-003",
+    "company_name": "FastTrack Dallas",
+    "segment": "Logistics",
     "region": "NA",
-    "contract_priority": "Tier 1",
-    "shipping_address": "26936 Bianca Harbor, Port Jackberg, ON R4L 8B8",
-    "penalty_clauses": {
-      "late_delivery": {
-        "grace_period_days": 0,
-        "penalty_rate": "2% of PO value per day",
-        "max_penalty": "20% of PO value",
-        "liquidated_damages": true,
-        "expedite_at_supplier_cost": true,
-        "on_time_delivery_sla": ">= 97% quarterly"
-      },
-      "quality": {
-        "incoming_inspection": "100% for critical components",
-        "rework_at_supplier_cost": true,
-        "rca_due_within_days": 5
-      }
-    }
+    "country": "USA",
+    "street": "300 Commerce St",
+    "city": "Dallas",
+    "state": "TX",
+    "postal_code": "75201",
+    "destination_facility_id": "dist_na_02",
+    "delivery_location_code": "USA_DAL",
+    "contract_priority": "Tier 2"
   },
   {
-    "customer_id": "423b92a6-c459-4375-b4a6-ea476a47fff0",
-    "company_name": "Helios-Aerospace Inc.",
+    "customer_id": "CUST-004",
+    "company_name": "Prime Air Denver",
+    "segment": "Logistics",
     "region": "NA",
-    "contract_priority": "Tier 1",
-    "shipping_address": "457 Rodney Points, South Pamela, BC B5L1J5",
-    "penalty_clauses": {
-      "late_delivery": {
-        "grace_period_days": 0,
-        "penalty_rate": "2% of PO value per day",
-        "max_penalty": "25% of PO value",
-        "liquidated_damages": true,
-        "expedite_at_supplier_cost": true,
-        "on_time_delivery_sla": ">= 97% quarterly"
-      },
-      "quality": {
-        "incoming_inspection": "100% for critical components",
-        "rework_at_supplier_cost": true,
-        "rca_due_within_days": 5
-      }
-    }
+    "country": "USA",
+    "street": "400 Colfax Ave",
+    "city": "Denver",
+    "state": "CO",
+    "postal_code": "80202",
+    "destination_facility_id": "dist_na_02",
+    "delivery_location_code": "USA_DAL",
+    "contract_priority": "Tier 2"
   },
   {
-    "customer_id": "ad7ed6bb-2897-4317-819c-3ee278120c12",
-    "company_name": "Atlas-Aerospace Industries",
-    "region": "EMEA",
-    "contract_priority": "Tier 2",
-    "shipping_address": "Enno-Lehmann-Allee 87/29, 51205 Kleve"
+    "customer_id": "CUST-005",
+    "company_name": "CargoFlow Chicago",
+    "segment": "Logistics",
+    "region": "NA",
+    "country": "USA",
+    "street": "500 W Madison",
+    "city": "Chicago",
+    "state": "IL",
+    "postal_code": "60661",
+    "destination_facility_id": "dist_na_01",
+    "delivery_location_code": "USA_DET",
+    "contract_priority": "Tier 2"
   },
   {
-    "customer_id": "b9aaea19-a655-4455-b757-b892f60c4bd0",
-    "company_name": "Keystone Automation",
+    "customer_id": "CUST-006",
+    "company_name": "GreenField Farms Iowa",
+    "segment": "Agriculture",
+    "region": "NA",
+    "country": "USA",
+    "street": "600 Farm Rd",
+    "city": "Des Moines",
+    "state": "IA",
+    "postal_code": "50301",
+    "destination_facility_id": "dist_na_02",
+    "delivery_location_code": "USA_DAL",
+    "contract_priority": "Tier 2"
+  },
+  {
+    "customer_id": "CUST-007",
+    "company_name": "MegaStruct Dubai",
+    "segment": "Agriculture",
     "region": "APAC",
-    "contract_priority": "Tier 2",
-    "shipping_address": "大分県横浜市磯子区秋葉原42丁目6番14号 外神田パレス409"
+    "country": "UAE",
+    "street": "700 Sheikh Zayed Rd",
+    "city": "Dubai",
+    "state": "",
+    "postal_code": "00000",
+    "destination_facility_id": "dist_apac_01",
+    "delivery_location_code": "SGP_SIN",
+    "contract_priority": "Tier 2"
   },
   {
-    "customer_id": "fb2b9aff-20b1-42a4-883d-308cbdf10cbc",
-    "company_name": "Vertex Precision Engineering Manufacturing",
+    "customer_id": "CUST-008",
+    "company_name": "AgriTech Midwest",
+    "segment": "Agriculture",
     "region": "NA",
-    "contract_priority": "Tier 2",
-    "shipping_address": "1871 Branch Tunnel Apt. 549, South Colleen, ME 52214"
+    "country": "USA",
+    "street": "800 Plains Dr",
+    "city": "Omaha",
+    "state": "NE",
+    "postal_code": "68101",
+    "destination_facility_id": "dist_na_02",
+    "delivery_location_code": "USA_DAL",
+    "contract_priority": "Tier 2"
   },
   {
-    "customer_id": "910295fc-4996-4f52-9414-4db4c11a814a",
-    "company_name": "Pacific Infrastructure Ltd",
+    "customer_id": "CUST-009",
+    "company_name": "Rural Drone Co",
+    "segment": "Agriculture",
+    "region": "NA",
+    "country": "USA",
+    "street": "900 Harvest Ln",
+    "city": "Kansas City",
+    "state": "MO",
+    "postal_code": "64101",
+    "destination_facility_id": "dist_na_02",
+    "delivery_location_code": "USA_DAL",
+    "contract_priority": "Tier 2"
+  },
+  {
+    "customer_id": "CUST-010",
+    "company_name": "Metro Police Chicago",
+    "segment": "Government",
+    "region": "NA",
+    "country": "USA",
+    "street": "1000 State St",
+    "city": "Chicago",
+    "state": "IL",
+    "postal_code": "60601",
+    "destination_facility_id": "dist_na_01",
+    "delivery_location_code": "USA_DET",
+    "contract_priority": "Tier 1"
+  },
+  {
+    "customer_id": "CUST-011",
+    "company_name": "Border Patrol El Paso",
+    "segment": "Government",
+    "region": "NA",
+    "country": "USA",
+    "street": "1100 Federal Blvd",
+    "city": "El Paso",
+    "state": "TX",
+    "postal_code": "79901",
+    "destination_facility_id": "dist_na_02",
+    "delivery_location_code": "USA_DAL",
+    "contract_priority": "Tier 1"
+  },
+  {
+    "customer_id": "CUST-012",
+    "company_name": "State Defense Logistics",
+    "segment": "Government",
+    "region": "NA",
+    "country": "USA",
+    "street": "1200 Capitol Ave",
+    "city": "Washington",
+    "state": "DC",
+    "postal_code": "20001",
+    "destination_facility_id": "dist_na_01",
+    "delivery_location_code": "USA_DET",
+    "contract_priority": "Tier 1"
+  },
+  {
+    "customer_id": "CUST-013",
+    "company_name": "National Aerospace Agency",
+    "segment": "Government",
+    "region": "NA",
+    "country": "USA",
+    "street": "1300 Research Pkwy",
+    "city": "Houston",
+    "state": "TX",
+    "postal_code": "77001",
+    "destination_facility_id": "dist_na_02",
+    "delivery_location_code": "USA_DAL",
+    "contract_priority": "Tier 1"
+  },
+  {
+    "customer_id": "CUST-014",
+    "company_name": "EMEA Gov Procurement",
+    "segment": "Government",
     "region": "EMEA",
-    "contract_priority": "Tier 2",
-    "shipping_address": "al. Bursztynowa 63, 02-418 Radomsko"
+    "country": "Netherlands",
+    "street": "1400 Hague Rd",
+    "city": "Rotterdam",
+    "state": "",
+    "postal_code": "3011",
+    "destination_facility_id": "dist_emea_01",
+    "delivery_location_code": "NLD_RTM",
+    "contract_priority": "Tier 1"
   },
   {
-    "customer_id": "48a24ae8-d202-4209-ad4d-f6e6a509a876",
-    "company_name": "Everbright-Logistics Industries",
-    "region": "NA",
-    "contract_priority": "Tier 2",
-    "shipping_address": "USS Edwards, FPO AA 60191"
-  },
-  {
-    "customer_id": "b29d24f7-326e-41de-a7ff-a96be33fabda",
-    "company_name": "Orion Rail Systems Inc",
-    "region": "NA",
-    "contract_priority": "Tier 2",
-    "shipping_address": "963 Nichols Union Apt. 053, Barbaramouth, YT G9T 5L2"
-  },
-  {
-    "customer_id": "bc2ae325-98d4-44a7-9a80-26b17e7e6011",
-    "company_name": "Keystone Precision Engineering Inc. Inc",
-    "region": "NA",
-    "contract_priority": "Tier 2",
-    "shipping_address": "672 Sean Locks Apt. 248, Reneefort, ME 76488"
-  },
-  {
-    "customer_id": "40f489ff-f19d-478b-95dd-3b1996b5b681",
-    "company_name": "Pacific-Automation AG",
-    "region": "NA",
-    "contract_priority": "Tier 2",
-    "shipping_address": "91800 Gonzalez Vista, Rowlandberg, ON G5R 8T3"
-  },
-  {
-    "customer_id": "5adc7e6a-890a-4bcf-8968-d45523a9dea4",
-    "company_name": "Pacific Mining",
-    "region": "NA",
-    "contract_priority": "Tier 2",
-    "shipping_address": "062 Kenneth Prairie, East Stevenstad, MT 64418"
-  },
-  {
-    "customer_id": "bea57f17-c9bf-431d-95a6-a691705951c6",
-    "company_name": "Rhein Rail Systems Ltd",
-    "region": "NA",
-    "contract_priority": "Tier 2",
-    "shipping_address": "76700 Mallory Point Apt. 443, Millerside, PE A8S 3J9"
+    "customer_id": "CUST-015",
+    "company_name": "Pacific Security Corp",
+    "segment": "Government",
+    "region": "APAC",
+    "country": "Singapore",
+    "street": "1500 Orchard Rd",
+    "city": "Singapore",
+    "state": "",
+    "postal_code": "238823",
+    "destination_facility_id": "dist_apac_01",
+    "delivery_location_code": "SGP_SIN",
+    "contract_priority": "Tier 1"
   }
 ]

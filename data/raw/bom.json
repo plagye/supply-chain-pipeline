@@ -1,268 +1,304 @@
 {
-  "product_id": "DRONE-X1",
-  "bom": [
-    {
-      "sub_assembly": "Airframe & Structure",
-      "components": [
+  "products": {
+    "D-101": {
+      "bom": [
         {
-          "component_id": "SKU-120",
-          "qty": 3.0
-        },
-        {
-          "component_id": "SKU-121",
-          "qty": 4.0
-        },
-        {
-          "component_id": "SKU-130",
-          "qty": 2.0
-        },
-        {
-          "component_id": "SKU-145",
-          "qty": 8
-        },
-        {
-          "component_id": "SKU-146",
-          "qty": 4
-        },
-        {
-          "component_id": "SKU-142",
-          "qty": 2
-        },
-        {
-          "component_id": "SKU-136",
-          "qty": 5.0
-        },
-        {
-          "component_id": "SKU-126",
-          "qty": 1.2
-        },
-        {
-          "component_id": "SKU-128",
-          "qty": 1.0
-        },
-        {
-          "component_id": "SKU-143",
-          "qty": 1
-        },
-        {
-          "component_id": "SKU-144",
-          "qty": 1
+          "components": [
+            {
+              "component_id": "P-001",
+              "qty": 1
+            },
+            {
+              "component_id": "P-003",
+              "qty": 4
+            },
+            {
+              "component_id": "P-005",
+              "qty": 4
+            },
+            {
+              "component_id": "P-006",
+              "qty": 1
+            },
+            {
+              "component_id": "P-008",
+              "qty": 1
+            }
+          ]
         }
       ]
     },
-    {
-      "sub_assembly": "Power System (6S2P Battery Pack)",
-      "components": [
+    "D-102": {
+      "bom": [
         {
-          "component_id": "SKU-100",
-          "qty": 12
-        },
-        {
-          "component_id": "SKU-101",
-          "qty": 1
-        },
-        {
-          "component_id": "SKU-105",
-          "qty": 2
-        },
-        {
-          "component_id": "SKU-114",
-          "qty": 2
-        },
-        {
-          "component_id": "SKU-122",
-          "qty": 10.0
-        },
-        {
-          "component_id": "SKU-135",
-          "qty": 4.0
-        },
-        {
-          "component_id": "SKU-127",
-          "qty": 0.2
-        },
-        {
-          "component_id": "SKU-126",
-          "qty": 0.3
+          "components": [
+            {
+              "component_id": "P-001",
+              "qty": 1
+            },
+            {
+              "component_id": "P-004",
+              "qty": 4
+            },
+            {
+              "component_id": "P-005",
+              "qty": 4
+            },
+            {
+              "component_id": "P-006",
+              "qty": 1
+            },
+            {
+              "component_id": "P-008",
+              "qty": 1
+            },
+            {
+              "component_id": "P-009",
+              "qty": 1
+            }
+          ]
         }
       ]
     },
-    {
-      "sub_assembly": "Propulsion System (4x Motor + ESC)",
-      "components": [
+    "D-103": {
+      "bom": [
         {
-          "component_id": "SKU-131",
-          "qty": 0.35
-        },
-        {
-          "component_id": "SKU-122",
-          "qty": 25.0
-        },
-        {
-          "component_id": "SKU-141",
-          "qty": 4
-        },
-        {
-          "component_id": "SKU-103",
-          "qty": 24
-        },
-        {
-          "component_id": "SKU-106",
-          "qty": 4
-        },
-        {
-          "component_id": "SKU-118",
-          "qty": 4
-        },
-        {
-          "component_id": "SKU-104",
-          "qty": 1
-        },
-        {
-          "component_id": "SKU-135",
-          "qty": 6.0
-        },
-        {
-          "component_id": "SKU-147",
-          "qty": 2
-        },
-        {
-          "component_id": "SKU-139",
-          "qty": 1
+          "components": [
+            {
+              "component_id": "P-001",
+              "qty": 1
+            },
+            {
+              "component_id": "P-004",
+              "qty": 4
+            },
+            {
+              "component_id": "P-005",
+              "qty": 4
+            },
+            {
+              "component_id": "P-007",
+              "qty": 1
+            },
+            {
+              "component_id": "P-008",
+              "qty": 1
+            }
+          ]
         }
       ]
     },
-    {
-      "sub_assembly": "Flight Controller & Avionics",
-      "components": [
+    "D-201": {
+      "bom": [
         {
-          "component_id": "SKU-115",
-          "qty": 1
-        },
-        {
-          "component_id": "SKU-102",
-          "qty": 1
-        },
-        {
-          "component_id": "SKU-119",
-          "qty": 1
-        },
-        {
-          "component_id": "SKU-117",
-          "qty": 20
-        },
-        {
-          "component_id": "SKU-116",
-          "qty": 6
-        },
-        {
-          "component_id": "SKU-107",
-          "qty": 2
-        },
-        {
-          "component_id": "SKU-104",
-          "qty": 2
-        },
-        {
-          "component_id": "SKU-110",
-          "qty": 1
-        },
-        {
-          "component_id": "SKU-109",
-          "qty": 1
-        },
-        {
-          "component_id": "SKU-108",
-          "qty": 1
-        },
-        {
-          "component_id": "SKU-112",
-          "qty": 3
-        },
-        {
-          "component_id": "SKU-113",
-          "qty": 4
+          "components": [
+            {
+              "component_id": "P-002",
+              "qty": 1
+            },
+            {
+              "component_id": "P-003",
+              "qty": 4
+            },
+            {
+              "component_id": "P-005",
+              "qty": 4
+            },
+            {
+              "component_id": "P-006",
+              "qty": 1
+            },
+            {
+              "component_id": "P-008",
+              "qty": 1
+            },
+            {
+              "component_id": "P-010",
+              "qty": 1
+            }
+          ]
         }
       ]
     },
-    {
-      "sub_assembly": "Camera & Payload Module",
-      "components": [
+    "D-202": {
+      "bom": [
         {
-          "component_id": "SKU-149",
-          "qty": 1
-        },
-        {
-          "component_id": "SKU-144",
-          "qty": 1
-        },
-        {
-          "component_id": "SKU-138",
-          "qty": 2
-        },
-        {
-          "component_id": "SKU-141",
-          "qty": 2
-        },
-        {
-          "component_id": "SKU-123",
-          "qty": 1.2
-        },
-        {
-          "component_id": "SKU-126",
-          "qty": 0.1
-        },
-        {
-          "component_id": "SKU-147",
-          "qty": 1
+          "components": [
+            {
+              "component_id": "P-002",
+              "qty": 1
+            },
+            {
+              "component_id": "P-003",
+              "qty": 6
+            },
+            {
+              "component_id": "P-005",
+              "qty": 6
+            },
+            {
+              "component_id": "P-006",
+              "qty": 2
+            },
+            {
+              "component_id": "P-008",
+              "qty": 1
+            }
+          ]
         }
       ]
     },
-    {
-      "sub_assembly": "Wiring & Connectors",
-      "components": [
+    "D-203": {
+      "bom": [
         {
-          "component_id": "SKU-140",
-          "qty": 1
-        },
-        {
-          "component_id": "SKU-122",
-          "qty": 20.0
-        },
-        {
-          "component_id": "SKU-114",
-          "qty": 4
-        },
-        {
-          "component_id": "SKU-135",
-          "qty": 8.0
-        },
-        {
-          "component_id": "SKU-136",
-          "qty": 2.0
+          "components": [
+            {
+              "component_id": "P-001",
+              "qty": 1
+            },
+            {
+              "component_id": "P-003",
+              "qty": 4
+            },
+            {
+              "component_id": "P-005",
+              "qty": 4
+            },
+            {
+              "component_id": "P-006",
+              "qty": 1
+            },
+            {
+              "component_id": "P-008",
+              "qty": 1
+            },
+            {
+              "component_id": "P-009",
+              "qty": 1
+            },
+            {
+              "component_id": "P-010",
+              "qty": 1
+            }
+          ]
         }
       ]
     },
-    {
-      "sub_assembly": "Service / Status Interface",
-      "components": [
+    "D-204": {
+      "bom": [
         {
-          "component_id": "SKU-111",
-          "qty": 1
-        },
+          "components": [
+            {
+              "component_id": "P-002",
+              "qty": 1
+            },
+            {
+              "component_id": "P-004",
+              "qty": 4
+            },
+            {
+              "component_id": "P-005",
+              "qty": 4
+            },
+            {
+              "component_id": "P-006",
+              "qty": 1
+            },
+            {
+              "component_id": "P-008",
+              "qty": 1
+            },
+            {
+              "component_id": "P-009",
+              "qty": 2
+            }
+          ]
+        }
+      ]
+    },
+    "D-301": {
+      "bom": [
         {
-          "component_id": "SKU-148",
-          "qty": 1
-        },
+          "components": [
+            {
+              "component_id": "P-002",
+              "qty": 1
+            },
+            {
+              "component_id": "P-004",
+              "qty": 8
+            },
+            {
+              "component_id": "P-005",
+              "qty": 8
+            },
+            {
+              "component_id": "P-007",
+              "qty": 2
+            },
+            {
+              "component_id": "P-008",
+              "qty": 1
+            }
+          ]
+        }
+      ]
+    },
+    "D-302": {
+      "bom": [
         {
-          "component_id": "SKU-112",
-          "qty": 2
-        },
+          "components": [
+            {
+              "component_id": "P-002",
+              "qty": 1
+            },
+            {
+              "component_id": "P-004",
+              "qty": 6
+            },
+            {
+              "component_id": "P-005",
+              "qty": 6
+            },
+            {
+              "component_id": "P-007",
+              "qty": 2
+            },
+            {
+              "component_id": "P-008",
+              "qty": 1
+            }
+          ]
+        }
+      ]
+    },
+    "D-303": {
+      "bom": [
         {
-          "component_id": "SKU-113",
-          "qty": 2
+          "components": [
+            {
+              "component_id": "P-002",
+              "qty": 1
+            },
+            {
+              "component_id": "P-004",
+              "qty": 8
+            },
+            {
+              "component_id": "P-005",
+              "qty": 8
+            },
+            {
+              "component_id": "P-007",
+              "qty": 3
+            },
+            {
+              "component_id": "P-008",
+              "qty": 1
+            }
+          ]
         }
       ]
     }
-  ]
+  }
 }
