@@ -38,6 +38,11 @@ def load_facilities():
     df_facilities.to_sql('dim_facilities', engine, if_exists='append', index=False)
     return None
 
+def load_products():
+    df_products = pd.read_json('../data/raw/products.json')
+    df_products.to_sql('dim_products', engine, if_exists='append', index=False)
+    return None
+
 def load_routes():
     with open('../data/raw/routes.json', 'r') as f:
         data = json.load(f)
@@ -66,31 +71,11 @@ def load_events():
                 continue
             try:
                 rec = json.loads(line)
-                if 'timestamp' in rec and 'event_type' in rec and 'payload' in rec:
-                    valid_records.append(rec)
-                else:
-                    corrupted_records.append((line_no, "Missing required keys", line[:50]))
-            except json.JSONDecodeError as e:
-                corrupted_records.append((line_no, str(e), line[:100]))
+                valid_records.append(rec)
+            except json.JSONDecodeError:
+                pass     
 
     df_events = pd.DataFrame(valid_records)
-
-    # Keep raw timestamp so we can log it for invalid-date rows
-    df_events["_raw_ts"] = df_events["timestamp"].astype(str)
-    df_events["timestamp"] = pd.to_datetime(df_events["timestamp"], utc=True, errors="coerce")
-
-    bad_dates_mask = df_events["timestamp"].isna()
-    invalid_date_records = df_events[bad_dates_mask].copy()
-    if len(invalid_date_records) > 0:
-        invalid_date_records["error"] = "Invalid date"
-        invalid_date_records = invalid_date_records[["_raw_ts", "event_type", "payload", "error"]]
-        invalid_date_records.rename(columns={"_raw_ts": "timestamp"}, inplace=True)
-        path = "../data/raw/events/_meta/corruption_history.jsonl"
-        invalid_date_records.to_json(path, orient="records", lines=True, date_format="iso")
-
-    df_events = df_events[~bad_dates_mask].copy()
-    df_events.drop(columns=["_raw_ts"], inplace=True)
-
     df_events["payload"] = df_events["payload"].apply(
         lambda x: json.dumps(x) if x is not None and isinstance(x, (dict, list)) else x
     )
@@ -104,5 +89,6 @@ if __name__ == "__main__":
     load_parts()
     load_events()
     load_facilities()
+    load_products()
     load_routes()
 
