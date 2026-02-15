@@ -62,7 +62,6 @@ def load_routes():
 
 def load_events():
     valid_records = []
-    corrupted_records = []
 
     with open('../data/raw/events/history.jsonl', 'r') as f:
         for line_no, line in enumerate(f, 1):

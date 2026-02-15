@@ -21,12 +21,27 @@ query = """
             SELECT source_event_id FROM stg_backorders
             UNION
             SELECT source_event_id FROM stg_delivery_events
+            UNION
+            SELECT source_event_id FROM stg_invoices
+            UNION
+            SELECT source_event_id FROM stg_demand_forecasts
+            UNION
+            SELECT source_event_id FROM stg_production_jobs
+            UNION
+            SELECT source_event_id FROM stg_purchase_orders
+            UNION
+            SELECT source_event_id FROM stg_po_receipts
         )
         AND e.event_type IN (
             'SalesOrderCreated',
             'BackorderCreated',
             'LoadCreated',
-            'DeliveryEvent'
+            'DeliveryEvent',
+            'InvoiceCreated',
+            'DemandForecastCreated',
+            'ProductionJobCreated',
+            'PurchaseOrderCreated',
+            'PurchaseOrderReceived'
         )
         ORDER BY e.event_id
         """
@@ -42,6 +57,11 @@ df_sales = df_events[df_events['event_type'] == 'SalesOrderCreated'].reset_index
 df_backorder = df_events[df_events['event_type'] == 'BackorderCreated'].reset_index(drop=True)
 df_load = df_events[df_events['event_type'] == 'LoadCreated'].reset_index(drop=True)
 df_delivery_events = df_events[df_events['event_type'] == 'DeliveryEvent'].reset_index(drop=True)
+df_invoices = df_events[df_events['event_type'] == 'InvoiceCreated'].reset_index(drop=True)
+df_demand_forecasts = df_events[df_events['event_type'] == 'DemandForecastCreated'].reset_index(drop=True)
+df_production_jobs = df_events[df_events['event_type'] == 'ProductionJobCreated'].reset_index(drop=True)
+df_purchase_orders = df_events[df_events['event_type'] == 'PurchaseOrderCreated'].reset_index(drop=True)
+df_po_receipts = df_events[df_events['event_type'] == 'PurchaseOrderReceived'].reset_index(drop=True)
 
 df_stg_orders = pd.DataFrame(df_sales['payload'].tolist())
 df_stg_orders['source_event_id'] = df_sales['event_id'].values
@@ -59,18 +79,64 @@ df_stg_delivery_events['event_type'] = df_stg_delivery_events['event_type'].map(
 df_stg_delivery_events['source_event_id'] = df_delivery_events['event_id'].values
 df_stg_delivery_events['event_timestamp'] = df_delivery_events['timestamp'].values
 
+df_stg_invoices = pd.DataFrame(df_invoices['payload'].tolist())
+df_stg_invoices['source_event_id'] = df_invoices['event_id'].values
+df_stg_invoices['invoice_timestamp'] = df_invoices['timestamp'].values
+df_stg_invoices = df_stg_invoices.drop(columns=['timestamp'], errors='ignore')
+
+df_stg_demand_forecasts = pd.DataFrame(df_demand_forecasts['payload'].tolist())
+df_stg_demand_forecasts['source_event_id'] = df_demand_forecasts['event_id'].values
+df_stg_demand_forecasts['event_timestamp'] = df_demand_forecasts['timestamp'].values
+
+df_stg_production_jobs = pd.DataFrame(df_production_jobs['payload'].tolist())
+df_stg_production_jobs['source_event_id'] = df_production_jobs['event_id'].values
+df_stg_production_jobs['event_timestamp'] = df_production_jobs['timestamp'].values
+
+df_stg_purchase_orders = pd.DataFrame(df_purchase_orders['payload'].tolist())
+df_stg_purchase_orders['source_event_id'] = df_purchase_orders['event_id'].values
+df_stg_purchase_orders['event_timestamp'] = df_purchase_orders['timestamp'].values
+df_stg_purchase_orders = df_stg_purchase_orders.drop(columns=[
+    'cost_variance_pct',
+    'supplier_reliability',
+    'effective_reliability',
+    'seasonal_lead_time_mult',
+    'seasonal_reliability_mult'
+], errors='ignore')
+
+df_stg_po_receipts = pd.DataFrame(df_po_receipts['payload'].tolist())
+df_stg_po_receipts['source_event_id'] = df_po_receipts['event_id'].values
+df_stg_po_receipts['received_timestamp'] = df_po_receipts['timestamp'].values
+
 with engine.connect() as conn:
     trans = conn.begin()
     try:
-        df_stg_orders.to_sql('stg_orders', conn, if_exists='append', index=False)
-        df_stg_backorders.to_sql('stg_backorders', conn, if_exists='append', index=False)
-        df_stg_loads.to_sql('stg_loads', conn, if_exists='append', index=False)
-        df_stg_delivery_events.to_sql('stg_delivery_events', conn, if_exists='append', index=False)
+        dfs = [
+            df_stg_orders,
+            df_stg_backorders,
+            df_stg_loads,
+            df_stg_delivery_events,
+            df_stg_invoices,
+            df_stg_demand_forecasts,
+            df_stg_production_jobs,
+            df_stg_purchase_orders,
+            df_stg_po_receipts
+        ]
+        tables = [
+            'stg_orders',
+            'stg_backorders',
+            'stg_loads',
+            'stg_delivery_events',
+            'stg_invoices',
+            'stg_demand_forecasts',
+            'stg_production_jobs',
+            'stg_purchase_orders',
+            'stg_po_receipts'
+        ]
+        for df, table in zip(dfs, tables):
+            df.to_sql(table, conn, if_exists='append', index=False)
         trans.commit()
-        print(f'Inserted {len(df_stg_orders)} rows into stg_orders')
-        print(f'Inserted {len(df_stg_backorders)} rows into stg_backorders')
-        print(f'Inserted {len(df_stg_loads)} rows into stg_loads')
-        print(f'Inserted {len(df_stg_delivery_events)} rows into stg_delivery_events')
+        for df, table in zip(dfs, tables):
+            print(f'Inserted {len(df)} rows into {table}')
     except Exception:
         trans.rollback()
         raise

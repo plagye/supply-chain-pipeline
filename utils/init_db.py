@@ -193,6 +193,74 @@ def init_tables():
             source_event_id BIGINT REFERENCES fact_events(event_id)
         );    
         """,
+        """
+            CREATE TABLE IF NOT EXISTS stg_invoices (
+            invoice_id UUID PRIMARY KEY,
+            order_id UUID REFERENCES stg_orders(order_id),
+            customer_id VARCHAR(100) REFERENCES dim_customers(customer_id),
+            product_id VARCHAR(100) REFERENCES dim_products(product_id),
+            qty INTEGER,
+            amount DECIMAL(12,2),
+            currency VARCHAR(10),
+            due_date TIMESTAMPTZ,
+            invoice_timestamp TIMESTAMPTZ,
+            source_event_id BIGINT REFERENCES fact_events(event_id)
+        );    
+        """,
+        """
+            CREATE TABLE IF NOT EXISTS stg_demand_forecasts (
+            snapshot_date DATE NOT NULL,
+            product_id VARCHAR(100) REFERENCES dim_products(product_id),
+            forecast_qty DECIMAL(12,2),
+            horizon_days INTEGER,
+            forecast_date DATE NOT NULL,
+            source_event_id BIGINT REFERENCES fact_events(event_id),
+            event_timestamp TIMESTAMPTZ NOT NULL,
+            PRIMARY KEY (source_event_id)
+        );    
+        """,
+        """
+            CREATE TABLE IF NOT EXISTS stg_production_jobs (
+            job_id UUID PRIMARY KEY,
+            product_id VARCHAR(100) REFERENCES dim_products(product_id),
+            status VARCHAR(50),
+            production_duration_hours INTEGER,
+            source_event_id BIGINT REFERENCES fact_events(event_id),
+            event_timestamp TIMESTAMPTZ NOT NULL
+        );    
+        """,
+        """
+            CREATE TABLE IF NOT EXISTS stg_purchase_orders (
+            purchase_order_id UUID PRIMARY KEY,
+            part_id VARCHAR(50) REFERENCES dim_parts(part_id),
+            qty INTEGER,
+            supplier_id VARCHAR(100) REFERENCES dim_suppliers(supplier_id),
+            supplier_country VARCHAR(100),
+            lead_time_hours INTEGER,
+            eta TIMESTAMPTZ,
+            is_reorder BOOLEAN,
+            unit_cost DECIMAL(12,2),
+            total_cost DECIMAL(14,2),
+            base_cost DECIMAL(12,2),
+            source_event_id BIGINT REFERENCES fact_events(event_id),
+            event_timestamp TIMESTAMPTZ NOT NULL
+        );    
+        """,
+        """
+            CREATE TABLE IF NOT EXISTS stg_po_receipts (
+            purchase_order_id UUID NOT NULL REFERENCES stg_purchase_orders(purchase_order_id),
+            part_id VARCHAR(50) NOT NULL REFERENCES dim_parts(part_id),
+            qty_ordered INTEGER NOT NULL,
+            qty_received INTEGER NOT NULL,
+            qty_rejected INTEGER NOT NULL DEFAULT 0,
+            supplier_id VARCHAR(100) NOT NULL,
+            was_partial_shipment BOOLEAN NOT NULL DEFAULT false,
+            new_qty_on_hand INTEGER NOT NULL,
+            received_timestamp TIMESTAMPTZ NOT NULL,
+            source_event_id BIGINT NOT NULL REFERENCES fact_events(event_id),
+            PRIMARY KEY (source_event_id)
+        );
+        """,
         # STATE
         """
             CREATE TABLE IF NOT EXISTS system_state (
