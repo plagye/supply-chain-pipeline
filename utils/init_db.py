@@ -153,6 +153,7 @@ def init_tables():
             CREATE TABLE IF NOT EXISTS stg_loads (
             load_id UUID PRIMARY KEY,
             order_id UUID REFERENCES stg_orders(order_id),
+            order_ids UUID[] NOT NULL DEFAULT '{}',
             customer_id VARCHAR(100) REFERENCES dim_customers(customer_id),
             route_id VARCHAR(100) REFERENCES dim_routes(route_id),
             product_id VARCHAR(100) REFERENCES dim_products(product_id),
@@ -162,6 +163,7 @@ def init_tables():
             load_status VARCHAR(50),
             scheduled_pickup TIMESTAMPTZ,
             scheduled_delivery TIMESTAMPTZ,
+            actual_delivery TIMESTAMPTZ,
             created_at TIMESTAMPTZ,
             distance_miles INTEGER,
             source_event_id BIGINT REFERENCES fact_events(event_id)
@@ -225,6 +227,7 @@ def init_tables():
             product_id VARCHAR(100) REFERENCES dim_products(product_id),
             status VARCHAR(50),
             production_duration_hours INTEGER,
+            qty_per_job INTEGER,
             source_event_id BIGINT REFERENCES fact_events(event_id),
             event_timestamp TIMESTAMPTZ NOT NULL
         );    
@@ -256,7 +259,93 @@ def init_tables():
             supplier_id VARCHAR(100) NOT NULL,
             was_partial_shipment BOOLEAN NOT NULL DEFAULT false,
             new_qty_on_hand INTEGER NOT NULL,
+            projected_eta TIMESTAMPTZ,
+            actual_receipt_time TIMESTAMPTZ,
             received_timestamp TIMESTAMPTZ NOT NULL,
+            source_event_id BIGINT NOT NULL REFERENCES fact_events(event_id),
+            PRIMARY KEY (source_event_id)
+        );
+        """,
+        """
+            CREATE TABLE IF NOT EXISTS stg_backorder_fulfillments (
+            order_id UUID REFERENCES stg_orders(order_id),
+            customer_id VARCHAR(100) REFERENCES dim_customers(customer_id),
+            product_id VARCHAR(100) REFERENCES dim_products(product_id),
+            qty_shipped INTEGER,
+            qty_still_pending INTEGER,
+            original_order_qty INTEGER,
+            remaining_stock INTEGER,
+            allocation_source VARCHAR(100),
+            unit_price DECIMAL(12,2),
+            amount DECIMAL(12,2),
+            allocated_from_production_job_id UUID REFERENCES stg_production_jobs(job_id),
+            source_event_id BIGINT NOT NULL REFERENCES fact_events(event_id),
+            event_timestamp TIMESTAMPTZ NOT NULL,
+            PRIMARY KEY (source_event_id)
+        );
+        """,
+        """
+            CREATE TABLE IF NOT EXISTS stg_shipments (
+            order_id UUID REFERENCES stg_orders(order_id),
+            customer_id VARCHAR(100) REFERENCES dim_customers(customer_id),
+            product_id VARCHAR(100) REFERENCES dim_products(product_id),
+            qty INTEGER,
+            qty_ordered INTEGER,
+            fulfillment_type VARCHAR(100),
+            remaining_stock INTEGER,
+            allocation_source VARCHAR(100),
+            unit_price DECIMAL(12,2),
+            amount DECIMAL(12,2),
+            allocated_from_production_job_id UUID REFERENCES stg_production_jobs(job_id),
+            source_event_id BIGINT REFERENCES fact_events(event_id),
+            event_timestamp TIMESTAMPTZ NOT NULL,
+            PRIMARY KEY (source_event_id)
+        );
+        """,
+        """
+            CREATE TABLE IF NOT EXISTS stg_material_requirements (
+            order_id UUID REFERENCES stg_orders(order_id),
+            product_id VARCHAR(100) REFERENCES dim_products(product_id),
+            source VARCHAR(100),
+            required_by_date DATE,
+            requirements JSONB,
+            source_event_id BIGINT REFERENCES fact_events(event_id),
+            event_timestamp TIMESTAMPTZ NOT NULL,
+             PRIMARY KEY (source_event_id)
+        );
+        """,
+        """
+            CREATE TABLE IF NOT EXISTS stg_production_starts (
+            job_id UUID REFERENCES stg_production_jobs(job_id),
+            product_id VARCHAR(100) REFERENCES dim_products(product_id),
+            status VARCHAR(50),
+            expected_completion TIMESTAMPTZ,
+            event_timestamp TIMESTAMPTZ NOT NULL,
+            source_event_id BIGINT NOT NULL REFERENCES fact_events(event_id),
+            PRIMARY KEY (source_event_id)
+        );
+        """,
+        """
+            CREATE TABLE IF NOT EXISTS stg_production_completions (
+            job_id UUID REFERENCES stg_production_jobs(job_id),
+            product_id VARCHAR(100) REFERENCES dim_products(product_id),
+            status VARCHAR(50),
+            qty_produced INTEGER,
+            new_qty_on_hand INTEGER,
+            event_timestamp TIMESTAMPTZ NOT NULL,
+            source_event_id BIGINT NOT NULL REFERENCES fact_events(event_id),
+            PRIMARY KEY (source_event_id)
+        );
+        """,
+        """
+            CREATE TABLE IF NOT EXISTS stg_sop_snapshots (
+            plan_date DATE NOT NULL,
+            scenario varchar(100),
+            product_id varchar(100) references dim_products(product_id),
+            demand_forecast_qty DECIMAL(12,2),
+            supply_plan_qty DECIMAL(12,2),
+            inventory_plan_qty DECIMAL(12,2),
+            event_timestamp TIMESTAMPTZ NOT NULL,
             source_event_id BIGINT NOT NULL REFERENCES fact_events(event_id),
             PRIMARY KEY (source_event_id)
         );

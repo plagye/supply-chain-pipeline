@@ -1,101 +1,101 @@
 {
   "P-001": {
-    "qty_on_hand": 717,
+    "qty_on_hand": 335,
     "reorder_point": 188,
     "safety_stock": 75
   },
   "P-002": {
-    "qty_on_hand": 145,
+    "qty_on_hand": 403,
     "reorder_point": 54,
     "safety_stock": 21
   },
   "P-003": {
-    "qty_on_hand": 39,
+    "qty_on_hand": 2739,
     "reorder_point": 31,
     "safety_stock": 20
   },
   "P-004": {
-    "qty_on_hand": 465,
+    "qty_on_hand": 6905,
     "reorder_point": 215,
     "safety_stock": 86
   },
   "P-005": {
-    "qty_on_hand": 9,
+    "qty_on_hand": 1937,
     "reorder_point": 95,
     "safety_stock": 38
   },
   "P-006": {
-    "qty_on_hand": 284,
+    "qty_on_hand": 951,
     "reorder_point": 88,
     "safety_stock": 35
   },
   "P-007": {
-    "qty_on_hand": 231,
+    "qty_on_hand": 543,
     "reorder_point": 82,
     "safety_stock": 33
   },
   "P-008": {
-    "qty_on_hand": 136,
+    "qty_on_hand": 507,
     "reorder_point": 60,
     "safety_stock": 24
   },
   "P-009": {
-    "qty_on_hand": 805,
+    "qty_on_hand": 731,
     "reorder_point": 214,
     "safety_stock": 85
   },
   "P-010": {
-    "qty_on_hand": 179,
+    "qty_on_hand": 590,
     "reorder_point": 51,
     "safety_stock": 20
   },
   "D-101": {
-    "qty_on_hand": 0,
+    "qty_on_hand": 74,
     "reorder_point": 15,
     "safety_stock": 5
   },
   "D-102": {
-    "qty_on_hand": 0,
+    "qty_on_hand": 257,
     "reorder_point": 15,
     "safety_stock": 5
   },
   "D-103": {
-    "qty_on_hand": 1,
+    "qty_on_hand": 28,
     "reorder_point": 15,
     "safety_stock": 5
   },
   "D-201": {
-    "qty_on_hand": 1,
+    "qty_on_hand": 116,
     "reorder_point": 15,
     "safety_stock": 5
   },
   "D-202": {
-    "qty_on_hand": 1,
+    "qty_on_hand": 72,
     "reorder_point": 15,
     "safety_stock": 5
   },
   "D-203": {
-    "qty_on_hand": 0,
+    "qty_on_hand": 196,
     "reorder_point": 15,
     "safety_stock": 5
   },
   "D-204": {
-    "qty_on_hand": 0,
+    "qty_on_hand": 242,
     "reorder_point": 15,
     "safety_stock": 5
   },
   "D-301": {
-    "qty_on_hand": 0,
+    "qty_on_hand": 263,
     "reorder_point": 15,
     "safety_stock": 5
   },
   "D-302": {
-    "qty_on_hand": 0,
+    "qty_on_hand": 262,
     "reorder_point": 15,
     "safety_stock": 5
   },
   "D-303": {
-    "qty_on_hand": 0,
+    "qty_on_hand": 126,
     "reorder_point": 15,
     "safety_stock": 5
   }
