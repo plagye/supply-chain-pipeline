@@ -297,7 +297,7 @@ def init_tables():
             unit_price DECIMAL(12,2),
             amount DECIMAL(12,2),
             allocated_from_production_job_id UUID REFERENCES stg_production_jobs(job_id),
-            source_event_id BIGINT REFERENCES fact_events(event_id),
+            source_event_id BIGINT NOT NULL REFERENCES fact_events(event_id),
             event_timestamp TIMESTAMPTZ NOT NULL,
             PRIMARY KEY (source_event_id)
         );
@@ -309,9 +309,9 @@ def init_tables():
             source VARCHAR(100),
             required_by_date DATE,
             requirements JSONB,
-            source_event_id BIGINT REFERENCES fact_events(event_id),
+            source_event_id BIGINT NOT NULL REFERENCES fact_events(event_id),
             event_timestamp TIMESTAMPTZ NOT NULL,
-             PRIMARY KEY (source_event_id)
+            PRIMARY KEY (source_event_id)
         );
         """,
         """
@@ -340,13 +340,37 @@ def init_tables():
         """
             CREATE TABLE IF NOT EXISTS stg_sop_snapshots (
             plan_date DATE NOT NULL,
-            scenario varchar(100),
-            product_id varchar(100) references dim_products(product_id),
+            scenario VARCHAR(100),
+            product_id VARCHAR(100) REFERENCES dim_products(product_id),
             demand_forecast_qty DECIMAL(12,2),
             supply_plan_qty DECIMAL(12,2),
             inventory_plan_qty DECIMAL(12,2),
             event_timestamp TIMESTAMPTZ NOT NULL,
             source_event_id BIGINT NOT NULL REFERENCES fact_events(event_id),
+            PRIMARY KEY (source_event_id)
+        );
+        """,
+        """
+            CREATE TABLE IF NOT EXISTS stg_payments (
+            invoice_id UUID NOT NULL REFERENCES stg_invoices(invoice_id),
+            order_id UUID REFERENCES stg_orders(order_id),
+            amount DECIMAL(12,2),
+            paid_at TIMESTAMPTZ,
+            on_time BOOLEAN,
+            source_event_id BIGINT NOT NULL REFERENCES fact_events(event_id),
+            event_timestamp TIMESTAMPTZ NOT NULL,
+            PRIMARY KEY (source_event_id)
+        );
+        """,
+        """
+            CREATE TABLE IF NOT EXISTS stg_reorders (
+            part_id VARCHAR(50) NOT NULL REFERENCES dim_parts(part_id),
+            qty_on_hand INTEGER NOT NULL,
+            reorder_point INTEGER NOT NULL,
+            net_position INTEGER NOT NULL,
+            order_qty INTEGER NOT NULL,
+            source_event_id BIGINT NOT NULL REFERENCES fact_events(event_id),
+            event_timestamp TIMESTAMPTZ NOT NULL,
             PRIMARY KEY (source_event_id)
         );
         """,

@@ -19,37 +19,23 @@ dtype_mapping = {
 query = """
         SELECT e.event_id, e.timestamp, e.event_type, e.payload
         FROM fact_events e
-        WHERE e.event_id NOT IN (
-            SELECT source_event_id FROM stg_orders
-            UNION
-            SELECT source_event_id FROM stg_loads
-            UNION
-            SELECT source_event_id FROM stg_backorders
-            UNION
-            SELECT source_event_id FROM stg_delivery_events
-            UNION
-            SELECT source_event_id FROM stg_invoices
-            UNION
-            SELECT source_event_id FROM stg_demand_forecasts
-            UNION
-            SELECT source_event_id FROM stg_production_jobs
-            UNION
-            SELECT source_event_id FROM stg_purchase_orders
-            UNION
-            SELECT source_event_id FROM stg_po_receipts
-            UNION
-            SELECT source_event_id FROM stg_backorder_fulfillments
-            UNION
-            SELECT source_event_id FROM stg_shipments
-            UNION
-            SELECT source_event_id FROM stg_material_requirements
-            UNION
-            SELECT source_event_id FROM stg_production_starts
-            UNION
-            SELECT source_event_id FROM stg_production_completions
-            UNION
-            SELECT source_event_id FROM stg_sop_snapshots
-        )
+        WHERE NOT EXISTS (SELECT 1 FROM stg_orders o WHERE o.source_event_id = e.event_id)
+        AND NOT EXISTS (SELECT 1 FROM stg_backorders b WHERE b.source_event_id = e.event_id)
+        AND NOT EXISTS (SELECT 1 FROM stg_loads l WHERE l.source_event_id = e.event_id)
+        AND NOT EXISTS (SELECT 1 FROM stg_delivery_events d WHERE d.source_event_id = e.event_id)
+        AND NOT EXISTS (SELECT 1 FROM stg_invoices i WHERE i.source_event_id = e.event_id)
+        AND NOT EXISTS (SELECT 1 FROM stg_demand_forecasts df WHERE df.source_event_id = e.event_id)
+        AND NOT EXISTS (SELECT 1 FROM stg_production_jobs pj WHERE pj.source_event_id = e.event_id)
+        AND NOT EXISTS (SELECT 1 FROM stg_purchase_orders po WHERE po.source_event_id = e.event_id)
+        AND NOT EXISTS (SELECT 1 FROM stg_po_receipts pr WHERE pr.source_event_id = e.event_id)
+        AND NOT EXISTS (SELECT 1 FROM stg_backorder_fulfillments bf WHERE bf.source_event_id = e.event_id)
+        AND NOT EXISTS (SELECT 1 FROM stg_shipments s WHERE s.source_event_id = e.event_id)
+        AND NOT EXISTS (SELECT 1 FROM stg_material_requirements mr WHERE mr.source_event_id = e.event_id)
+        AND NOT EXISTS (SELECT 1 FROM stg_production_starts ps WHERE ps.source_event_id = e.event_id)
+        AND NOT EXISTS (SELECT 1 FROM stg_production_completions pc WHERE pc.source_event_id = e.event_id)
+        AND NOT EXISTS (SELECT 1 FROM stg_sop_snapshots ss WHERE ss.source_event_id = e.event_id)
+        AND NOT EXISTS (SELECT 1 FROM stg_payments p WHERE p.source_event_id = e.event_id)
+        AND NOT EXISTS (SELECT 1 FROM stg_reorders r WHERE r.source_event_id = e.event_id)
         AND e.event_type IN (
             'SalesOrderCreated',
             'BackorderCreated',
@@ -65,7 +51,9 @@ query = """
             'MaterialRequirementsCreated',
             'ProductionStarted',
             'ProductionCompleted',
-            'SOPSnapshotCreated'
+            'SOPSnapshotCreated',
+            'PaymentReceived',
+            'ReorderTriggered'
         )
         ORDER BY e.event_id
         """
@@ -92,6 +80,8 @@ df_material_requirements = df_events[df_events['event_type'] == 'MaterialRequire
 df_production_starts = df_events[df_events['event_type'] == 'ProductionStarted'].reset_index(drop=True)
 df_production_completions = df_events[df_events['event_type'] == 'ProductionCompleted'].reset_index(drop=True)
 df_sop_snapshots = df_events[df_events['event_type'] == 'SOPSnapshotCreated'].reset_index(drop=True)
+df_payments = df_events[df_events['event_type'] == 'PaymentReceived'].reset_index(drop=True)
+df_reorders = df_events[df_events['event_type'] == 'ReorderTriggered'].reset_index(drop=True)
 
 df_stg_orders = pd.DataFrame(df_sales['payload'].tolist())
 df_stg_orders['source_event_id'] = df_sales['event_id'].values
@@ -163,6 +153,15 @@ df_stg_production_completions['event_timestamp'] = df_production_completions['ti
 df_stg_sop_snapshots = pd.DataFrame(df_sop_snapshots['payload'].tolist())
 df_stg_sop_snapshots['source_event_id'] = df_sop_snapshots['event_id'].values
 df_stg_sop_snapshots['event_timestamp'] = df_sop_snapshots['timestamp'].values
+
+df_stg_payments = pd.DataFrame(df_payments['payload'].tolist())
+df_stg_payments['source_event_id'] = df_payments['event_id'].values
+df_stg_payments['event_timestamp'] = df_payments['timestamp'].values
+
+df_stg_reorders = pd.DataFrame(df_reorders['payload'].tolist())
+df_stg_reorders['source_event_id'] = df_reorders['event_id'].values
+df_stg_reorders['event_timestamp'] = df_reorders['timestamp'].values
+
 with engine.connect() as conn:
     trans = conn.begin()
     try:
@@ -181,7 +180,9 @@ with engine.connect() as conn:
             df_stg_material_requirements,
             df_stg_production_starts,
             df_stg_production_completions,
-            df_stg_sop_snapshots
+            df_stg_sop_snapshots,
+            df_stg_payments,
+            df_stg_reorders
         ]
         tables = [
             'stg_orders',
@@ -198,7 +199,9 @@ with engine.connect() as conn:
             'stg_material_requirements',
             'stg_production_starts',
             'stg_production_completions',
-            'stg_sop_snapshots'
+            'stg_sop_snapshots',
+            'stg_payments',
+            'stg_reorders'
         ]
         for df, table in zip(dfs, tables):
             if table == 'stg_sop_snapshots':
