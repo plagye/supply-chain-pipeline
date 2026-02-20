@@ -95,7 +95,10 @@ df_stg_loads = pd.DataFrame(df_load['payload'].tolist())
 df_stg_loads['source_event_id'] = df_load['event_id'].values
 
 df_stg_delivery_events = pd.DataFrame(df_delivery_events['payload'].tolist())
-df_stg_delivery_events['event_type'] = df_stg_delivery_events['event_type'].map({'Pickup': 'P', 'Delivery': 'D'})
+if not df_stg_delivery_events.empty:
+    df_stg_delivery_events['event_type'] = df_stg_delivery_events['event_type'].map({'Pickup': 'P', 'Delivery': 'D'})
+else:
+    df_stg_delivery_events['event_type'] = pd.Series(dtype=object)
 df_stg_delivery_events['source_event_id'] = df_delivery_events['event_id'].values
 df_stg_delivery_events['event_timestamp'] = df_delivery_events['timestamp'].values
 
@@ -138,9 +141,12 @@ df_stg_shipments['event_timestamp'] = df_shipments['timestamp'].values
 df_stg_material_requirements = pd.DataFrame(df_material_requirements['payload'].tolist())
 df_stg_material_requirements['source_event_id'] = df_material_requirements['event_id'].values
 df_stg_material_requirements['event_timestamp'] = df_material_requirements['timestamp'].values
-df_stg_material_requirements['requirements'] = df_stg_material_requirements['requirements'].apply(
-    lambda x: json.dumps(x) if isinstance(x, (list, dict)) else x
-)
+if not df_stg_material_requirements.empty:
+    df_stg_material_requirements['requirements'] = df_stg_material_requirements['requirements'].apply(
+        lambda x: json.dumps(x) if isinstance(x, (list, dict)) else x
+    )
+else:
+    df_stg_material_requirements['requirements'] = pd.Series(dtype=object)
 
 df_stg_production_starts = pd.DataFrame(df_production_starts['payload'].tolist())
 df_stg_production_starts['source_event_id'] = df_production_starts['event_id'].values
@@ -203,10 +209,19 @@ with engine.connect() as conn:
             'stg_payments',
             'stg_reorders'
         ]
-        for df, table in zip(dfs, tables):
-            if table == 'stg_sop_snapshots':
+        for i, (df, table) in enumerate(zip(dfs, tables)):
+            if table == 'stg_sop_snapshots' and not df.empty and 'product_id' in df.columns:
                 df = df[~df['product_id'].str.startswith('P-')]
                 print(f"Filtered {len(df)} parts from {table}")
+                dfs[i] = df
+            if table == 'stg_payments' and not df.empty and 'invoice_id' in df.columns:
+                valid_invoice_ids = pd.read_sql(text("SELECT invoice_id FROM stg_invoices"), conn)["invoice_id"].astype(str)
+                n_before = len(df)
+                df = df[df["invoice_id"].astype(str).isin(valid_invoice_ids)]
+                n_dropped = n_before - len(df)
+                if n_dropped:
+                    print(f"Dropped {n_dropped} payment row(s) with invoice_id not in stg_invoices")
+                dfs[i] = df
             df.to_sql(table, conn, if_exists='append', index=False, dtype=dtype_mapping)
         trans.commit()
         for df, table in zip(dfs, tables):
